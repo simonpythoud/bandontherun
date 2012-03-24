@@ -1,11 +1,11 @@
 //<debug>
 Ext.Loader.setPath({
-    'Ext': '../../src'
+    'Ext': 'st2/src'
 });
 //</debug>
 
 Ext.application({
-    name: 'AddressBook',
+    name: 'BandOnTheRun',
 
     phoneStartupScreen: 'resources/loading/Homescreen.jpg',
     tabletStartupScreen: 'resources/loading/Homescreen~ipad.jpg',
@@ -20,12 +20,12 @@ Ext.application({
 
     models: ['Contact'],
     stores: ['Contacts'],
-    views: ['Main'],
+    views: ['Main', 'Login', 'Band'],
     controllers: ['Application'],
 
     launch: function() {
         Ext.Viewport.add({
-            xclass: 'AddressBook.view.Main'
+            xclass: 'BandOnTheRun.view.Main'
         });
     }
 });

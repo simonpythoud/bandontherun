@@ -1,4 +1,4 @@
-Ext.define('AddressBook.view.contact.Show', {
+Ext.define('BandOnTheRun.view.contact.Show', {
     extend: 'Ext.Container',
     xtype: 'contact-show',
 

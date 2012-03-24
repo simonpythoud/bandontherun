@@ -1,4 +1,4 @@
-Ext.define('AddressBook.model.Contact', {
+Ext.define('BandOnTheRun.model.Contact', {
     extend: 'Ext.data.Model',
 
     config: {

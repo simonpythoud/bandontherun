@@ -1,20 +1,23 @@
-Ext.define('AddressBook.controller.Application', {
+Ext.define('BandOnTheRun.controller.Application', {
     extend: 'Ext.app.Controller',
 
     config: {
         refs: {
             main: 'mainview',
+            band: 'bandview',
+            login: 'loginview',
             editButton: '#editButton',
             contacts: 'contacts',
             showContact: 'contact-show',
             editContact: 'contact-edit',
-            saveButton: '#saveButton'
+            saveButton: '#saveButton', 
+            loginButton: 'button[action=signin]'
         },
 
         control: {
-            main: {
-                push: 'onMainPush',
-                pop: 'onMainPop'
+            band: {
+                push: 'onBandPush',
+                pop: 'onBandPop'
             },
             editButton: {
                 tap: 'onContactEdit'
@@ -31,7 +34,7 @@ Ext.define('AddressBook.controller.Application', {
         }
     },
 
-    onMainPush: function(view, item) {
+    onBandPush: function(view, item) {
         var editButton = this.getEditButton();
 
         if (item.xtype == "contact-show") {
@@ -43,7 +46,7 @@ Ext.define('AddressBook.controller.Application', {
         }
     },
 
-    onMainPop: function(view, item) {
+    onBandPop: function(view, item) {
         if (item.xtype == "contact-edit") {
             this.showEditButton();
         } else {
@@ -55,25 +58,25 @@ Ext.define('AddressBook.controller.Application', {
         var editButton = this.getEditButton();
 
         if (!this.showContact) {
-            this.showContact = Ext.create('AddressBook.view.contact.Show');
+            this.showContact = Ext.create('BandOnTheRun.view.contact.Show');
         }
 
         // Bind the record onto the show contact view
         this.showContact.setRecord(record);
 
         // Push the show contact view into the navigation view
-        this.getMain().push(this.showContact);
+        this.getBand().push(this.showContact);
     },
 
     onContactEdit: function() {
         if (!this.editContact) {
-            this.editContact = Ext.create('AddressBook.view.contact.Edit');
+            this.editContact = Ext.create('BandOnTheRun.view.contact.Edit');
         }
 
         // Bind the record onto the edit contact view
         this.editContact.setRecord(this.getShowContact().getRecord());
 
-        this.getMain().push(this.editContact);
+        this.getBand().push(this.editContact);
     },
 
     onContactChange: function() {
@@ -85,7 +88,7 @@ Ext.define('AddressBook.controller.Application', {
 
         this.getShowContact().updateRecord(record);
 
-        this.getMain().pop();
+        this.getBand().pop();
     },
 
     showEditButton: function() {

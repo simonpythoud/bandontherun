@@ -1,8 +1,8 @@
-Ext.define('AddressBook.store.Contacts', {
+Ext.define('BandOnTheRun.store.Contacts', {
     extend: 'Ext.data.Store',
 
     config: {
-        model: 'AddressBook.model.Contact',
+        model: 'BandOnTheRun.model.Contact',
         autoLoad: true,
         sorters: 'firstName',
         grouper: {

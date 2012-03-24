@@ -1,55 +1,26 @@
-Ext.define('AddressBook.view.Main', {
-    extend: 'Ext.navigation.View',
+Ext.define('BandOnTheRun.view.Main', {
+    extend: 'Ext.Panel',
     xtype: 'mainview',
 
     requires: [
-        'AddressBook.view.Contacts',
-        'AddressBook.view.contact.Show',
-        'AddressBook.view.contact.Edit'
+    'BandOnTheRun.view.Login',
+    'BandOnTheRun.view.Band'
     ],
 
     config: {
-        autoDestroy: false,
-
-        navigationBar: {
-            ui: 'sencha',
-            items: [
-                {
-                    xtype: 'button',
-                    id: 'editButton',
-                    text: 'Edit',
-                    align: 'right',
-                    hidden: true,
-                    hideAnimation: Ext.os.is.Android ? false : {
-                        type: 'fadeOut',
-                        duration: 200
-                    },
-                    showAnimation: Ext.os.is.Android ? false : {
-                        type: 'fadeIn',
-                        duration: 200
-                    }
-                },
-                {
-                    xtype: 'button',
-                    id: 'saveButton',
-                    text: 'Save',
-                    ui: 'sencha',
-                    align: 'right',
-                    hidden: true,
-                    hideAnimation: Ext.os.is.Android ? false : {
-                        type: 'fadeOut',
-                        duration: 200
-                    },
-                    showAnimation: Ext.os.is.Android ? false : {
-                        type: 'fadeIn',
-                        duration: 200
-                    }
-                }
-            ]
-        },
+        layout: 'card',
 
         items: [
-            { xtype: 'contacts' }
+        {
+            // first, empty panel
+            xtype: 'panel'
+        }, 
+        {
+            xtype: 'loginview'
+        }, 
+        {
+            xtype: 'bandview'
+        } 
         ]
     }
 });

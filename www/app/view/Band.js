@@ -1,18 +1,17 @@
-Ext.define('AddressBook.view.Main', {
+Ext.define('BandOnTheRun.view.Band', {
     extend: 'Ext.navigation.View',
-    xtype: 'mainview',
+    xtype: 'bandview',
 
     requires: [
-        'AddressBook.view.Contacts',
-        'AddressBook.view.contact.Show',
-        'AddressBook.view.contact.Edit'
+        'BandOnTheRun.view.Contacts',
+        'BandOnTheRun.view.contact.Show',
+        'BandOnTheRun.view.contact.Edit'
     ],
 
     config: {
         autoDestroy: false,
 
         navigationBar: {
-            ui: 'sencha',
             items: [
                 {
                     xtype: 'button',
@@ -33,7 +32,6 @@ Ext.define('AddressBook.view.Main', {
                     xtype: 'button',
                     id: 'saveButton',
                     text: 'Save',
-                    ui: 'sencha',
                     align: 'right',
                     hidden: true,
                     hideAnimation: Ext.os.is.Android ? false : {
