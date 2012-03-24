@@ -2,7 +2,7 @@
     "name": "AddressBook",
     "js": [
         {
-            "path": "../../sencha-touch-all-debug.js"
+            "path": "st2/sencha-touch-all-debug.js"
         },
         {
             "path": "app.js",
@@ -33,10 +33,10 @@
     ],
     "archivePath": "archive",
     "buildPaths": {
-        "testing": "../../deploy/testing/navigationview",
-        "production": "../../deploy/production/navigationview",
-        "package": "../../deploy/package/navigationview",
-        "native": "../../deploy/native/navigationview"
+        "testing": "st2/deploy/testing/navigationview",
+        "production": "st2/deploy/production/navigationview",
+        "package": "st2/deploy/package/navigationview",
+        "native": "st2/deploy/native/navigationview"
     },
     "buildOptions": {
         "product": "touch",
