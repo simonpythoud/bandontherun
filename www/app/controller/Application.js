@@ -10,7 +10,8 @@ Ext.define('BandOnTheRun.controller.Application', {
             listBand: 'band-list',
             showBand: 'band-show',
             editBand: 'band-edit',
-            saveButton: '#saveButton'
+            saveButton: '#saveButton',
+            conferenceCallButton: '#conferenceCallButton'
         },
 
         control: {
@@ -29,8 +30,29 @@ Ext.define('BandOnTheRun.controller.Application', {
             },
             editBand: {
                 change: 'onBandChange'
+            }, 
+            conferenceCallButton: {
+                tap: 'startConferenceCall'
             }
         }
+    },
+    
+    startConferenceCall: function() {
+        // we create the Ajax request
+        Ext.Ajax.request({
+            //first we give it the URL of the request. take not that this can only be local to the web server
+            //you are on
+            url: 'start_call',
+
+            //then we define a success method, which is called once the ajax request is successful
+            success: function(response) {
+                console.log('Conference started');
+                
+            },
+            failure: function() {
+                console.log('Conference ended');
+            }
+        });
     },
     
     showBandPanel: function(){

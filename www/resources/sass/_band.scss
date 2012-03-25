@@ -86,10 +86,12 @@
 
     .x-band-show-toolbar {
         .x-button {
-            width: 200px;
+            width: 180px;
             
             .x-button-icon {
-                background-image: url('../images/phone.png'); 
+                background-image: url('../images/phone.png') !important;
+                background-size: cover;
+                background-color: transparent !important;
             }
         }
     }

@@ -29,7 +29,8 @@ Ext.define('BandOnTheRun.view.band.Show', {
                 xtype: 'spacer'
             },
             {
-                xtype: 'button', 
+                xtype: 'button',
+                id: 'conferenceCallButton',
                 action : 'call',
                 text : 'Start the call',
                 iconCls: 'call',
