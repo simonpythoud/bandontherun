@@ -1,6 +1,25 @@
 // login
 .login-panel {
-    .x-container {
-        background-color: #fff
+    .x-button {
+        background-image: url('../images/sign-in-with-twitter-d.png'); 
+        border: 0;
+        min-height: 0;
+        width: 151px;
+        height: 24px;
+        display: block;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        margin-left: -75px;
+        margin-top: -12px;
+        @include border-radius(0);
+        
+        .x-button-label {
+            display: none;
+        }
+        
+        &.x-button-pressing {
+            background-image: url('../images/sign-in-with-twitter-l.png'); 
+        }
     }
 }

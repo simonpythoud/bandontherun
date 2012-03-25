@@ -12,10 +12,6 @@ Ext.define('BandOnTheRun.view.Main', {
 
         items: [
         {
-            // first, empty panel
-            xtype: 'panel'
-        }, 
-        {
             xtype: 'loginview'
         }, 
         {

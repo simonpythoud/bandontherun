@@ -5,13 +5,11 @@ Ext.define('BandOnTheRun.controller.Application', {
         refs: {
             main: 'mainview',
             band: 'bandview',
-            login: 'loginview',
             editButton: '#editButton',
             contacts: 'contacts',
             showContact: 'contact-show',
             editContact: 'contact-edit',
-            saveButton: '#saveButton', 
-            loginButton: 'button[action=signin]'
+            saveButton: '#saveButton'
         },
 
         control: {
@@ -32,6 +30,10 @@ Ext.define('BandOnTheRun.controller.Application', {
                 change: 'onContactChange'
             }
         }
+    },
+    
+    showBand: function(){
+        this.getMain().setActiveItem(this.getBand());
     },
 
     onBandPush: function(view, item) {

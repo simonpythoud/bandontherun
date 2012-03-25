@@ -21,11 +21,50 @@ Ext.application({
     models: ['Contact'],
     stores: ['Contacts'],
     views: ['Main', 'Login', 'Band'],
-    controllers: ['Application'],
+    controllers: ['Application', 'Login'],
 
     launch: function() {
         Ext.Viewport.add({
             xclass: 'BandOnTheRun.view.Main'
         });
+        
+        // login process
+        var login = this.getController('Login');
+
+        var me = this;
+		
+        // first thing we do, is to check to see if the url contains the access code
+        // and process it if it does.
+        login.handleOAuthCallback(window.location.href, {
+            success : function() {
+                window.location=window.location.pathname;  // this will force reload the page, and it will remove the accessToken from the URL
+            }, 
+            failure : function() {
+                // this url was not done on call back, so normal login flow
+                login.getLoggedInUser({
+                    success : me.startup,
+                    failure : me.showLogin
+                });
+            }
+        });
+		
+    }, 
+    
+    startup: function() {
+        this.getController('Application').showBand();
     }
 });
+
+function getUrlVars(url) {
+	url || (url = window.location.href);
+	var vars = {};
+	var parts = url.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) {
+		vars[key] = value;
+	});
+	return vars;
+}
+
+/*
+console.log("---startup");
+		this.getController('Login').hideLogin();
+*/
