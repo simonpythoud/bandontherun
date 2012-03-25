@@ -48,31 +48,44 @@ Ext.application({
         // Add it to the Viewport.
         Ext.Viewport.add(main);
         
-        
         // login process
         var login = this.getController('Login');
-
-        var me = this;
-		
-        // first thing we do, is to check to see if the url contains the access code
-        // and process it if it does.
-        login.handleOAuthCallback(window.location.href, {
-            success : function() {
-                window.location=window.location.pathname;  // this will force reload the page, and it will remove the accessToken from the URL
-            }, 
-            failure : function() {
-                // this url was not done on call back, so normal login flow
-                login.getLoggedInUser({
-                    success : me.startup,
-                    failure : me.showLogin
-                });
-            }
-        });
+        
+        if(this.isLogged()){
+            this.startup(); 
+        } 
+        
+//		
+//        // first thing we do, is to check to see if the url contains the access code
+//        // and process it if it does.
+//        login.handleOAuthCallback(window.location.href, {
+//            success : function() {
+//                window.location=window.location.pathname;  // this will force reload the page, and it will remove the accessToken from the URL
+//            }, 
+//            failure : function() {
+//                // this url was not done on call back, so normal login flow
+//                login.getLoggedInUser({
+//                    success : me.startup,
+//                    failure : me.showLogin
+//                });
+//            }
+//        });
 		
     }, 
     
     startup: function() {
         this.getController('Application').showBandPanel();
+    }, 
+    
+    isLogged : function() {
+        // if URL contains a parameter 'code', then we will create an authorized user from that code.  If not, then we
+        // return doing nothing.
+        var token = getUrlVars(window.location.href)['logged_in'];
+        if(token && token == 'true') {
+            return true;
+        } else {
+            return false;
+        }
     }
 });
 

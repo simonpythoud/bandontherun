@@ -33,8 +33,7 @@ Ext.define('BandOnTheRun.controller.Login', {
     ///////////////////
 
     onSigninButton : function() {
-        //this.doLogin();
-        BandOnTheRun.app.startup();
+        this.doLogin();
     },
     hideLogin : function() {
         var panel = this.getLogin();
@@ -51,7 +50,8 @@ Ext.define('BandOnTheRun.controller.Login', {
         // which is handed off to the app.
 
         var returnUri = escape(window.location.href);
-        window.location = this.oAuthCred.urlAuthorize + '&client_id=' + this.oAuthCred.clientId + '&redirect_uri=' + returnUri + '&client_secret=' + this.oAuthCred.clientSecret + '&scope=profile%2CSMS%2CMMS%2CACC';
+        window.location = "http://bandontherun.orospakr.ca:8081/login";
+        //window.location = returnUri + this.oAuthCred.urlAuthorize + '&client_id=' + this.oAuthCred.clientId + '&redirect_uri=' + returnUri + '&client_secret=' + this.oAuthCred.clientSecret + '&scope=profile%2CSMS%2CMMS%2CACC';
     },
     /**
 	 * Use the identity in the authorization flow to create a standard user record

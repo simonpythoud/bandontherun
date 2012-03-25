@@ -30,8 +30,8 @@
     }
 }
 
-// show contact
-.x-show-contact {
+// show band
+.x-show-band {
     background: #EEEEEE;
 
     .top {
@@ -80,6 +80,16 @@
 
             span {
                 font-weight: bold;
+            }
+        }
+    }
+
+    .x-band-show-toolbar {
+        .x-button {
+            width: 200px;
+            
+            .x-button-icon {
+                background-image: url('../images/phone.png'); 
             }
         }
     }
