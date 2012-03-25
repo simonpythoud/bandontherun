@@ -10,8 +10,8 @@ Ext.define('BandOnTheRun.view.Band', {
 
     config: {
         autoDestroy: false,
-
         navigationBar: {
+            ui: 'bandontherun',
             items: [
                 {
                     xtype: 'button',

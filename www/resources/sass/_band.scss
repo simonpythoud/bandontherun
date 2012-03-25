@@ -1,3 +1,12 @@
+// navigation view for bands
+.x-navigation-bar {
+    background-image: url("../images/logo.png") !important;
+    background-repeat: no-repeat;
+    background-position: 99% center;
+    background-size: 40px;
+}
+
+
 // bands
 .x-bands {
     .x-list-item-label {
@@ -80,6 +89,10 @@
 
             span {
                 font-weight: bold;
+            }
+            
+            li {
+                padding: 2px 0 0 10px;
             }
         }
     }

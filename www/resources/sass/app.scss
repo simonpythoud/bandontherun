@@ -17,16 +17,20 @@ $list-active-color: mix(#043F62, #fff, 0);
 
 //blue toolbar
 @include sencha-toolbar-ui('sencha', #06517E, matte);
+@include sencha-toolbar-ui('bandontherun', #F5D18A, matte);
 .x-toolbar-sencha .x-title {
     text-shadow: 0 1px 0 rgba(0,0,0,.8);
 }
 
 //buttons
-@include sencha-button-ui('sencha', #2E9A3E, matte);
+@include sencha-button-ui('sencha', #E7681F, matte);
+@include sencha-button-ui('bandontherun', #FF6600, matte);
 
 //Background image
 #ext-viewport {
-    background-image: url('../images/bg.png'); 
+    background-image: url("../images/logo.png"), url("../images/bg.png");
+    background-repeat: no-repeat, repeat;
+    background-position: center 5px, center center;
 }
 
 
