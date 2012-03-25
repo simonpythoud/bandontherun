@@ -4,15 +4,20 @@ Ext.define('BandOnTheRun.store.Bands', {
     config: {
         model: 'BandOnTheRun.model.Band',
         autoLoad: true,
-        sorters: 'firstName',
+        sorters: 'artist',
         grouper: {
             groupFn: function(record) {
-                return record.get('lastName')[0];
+                return record.get('artist')[0];
             }
         },
         proxy: {
             type: 'ajax',
-            url: 'contacts.json'
+            url: 'bands.json',
+//            url: 'http://172.25.97.123:8080/jams', 
+            reader: {
+                type: 'json',
+                rootProperty: 'jams'
+            }
         }
     }
 });

@@ -3,16 +3,11 @@ Ext.define('BandOnTheRun.model.Band', {
 
     config: {
         fields: [
-            'firstName',
-            'lastName',
-            'headshot',
-            'title',
-            'telephone',
-            'city',
-            'state',
-            'country',
-            'latitude',
-            'longitude'
+           'id',
+           'title', 
+           'artist', 
+           'needed',
+           'img'
         ]
     }
 });

@@ -1,0 +1,93 @@
+{
+    "jams":[{
+        "id":1,
+        "title":"Beatles Jam",
+        "artist":"The Bealtes",
+        "needed":"Guitarist, Bassist",
+        "img":"http://upload.wikimedia.org/wikipedia/commons/thumb/d/df/The_Fabs.JPG/220px-The_Fabs.JPG"
+    }, {
+        "id":2,
+        "title":"Zeppelin RuleZ!",
+        "artist":"Led Zeppelin",
+        "needed":"Vocalist, Drummer",
+        "img":"http://ledzeppelinguitar.com/wp-content/uploads/2011/05/led-zeppelin-car.jpg"
+    }, {
+        "id":3,
+        "title":"Buddy Stuff",
+        "artist":"Buddy Guy",
+        "needed":"Harmonist",
+        "img":"http://userserve-ak.last.fm/serve/252/12224445.jpg"
+    }, {
+        "id":4,
+        "title":"Beard fun :)",
+        "artist":"ZZ Top",
+        "needed":"Pianist",
+        "img":"http://www.thrashhits.com/wp-content/gallery/zz-top-download-festival-14-june-2009/zz-top_0897.jpg"
+    }, {
+        "id":5,
+        "title":"SRV Jam",
+        "artist":"SRV",
+        "needed":"Guitarist",
+        "img":"http://1.bp.blogspot.com/_tNu78SMKH6I/THulrMzjTdI/AAAAAAAADz8/FvNFEQ9T8n0/s1600/srv+lenny.jpg"
+    }, {
+        "id":6,
+        "title":"BB King Jam",
+        "artist":"BB King",
+        "needed":"Bassist",
+        "img":"http://www.widb.net/wp/wp-content/uploads/2012/02/35_MUSIC_BB_King.jpg"
+    }, {
+        "id":7,
+        "title":"Jaco Pastorius Jam",
+        "artist":"Jaco Pastorius",
+        "needed":"Pianist",
+        "img":"http://celebrityrockstarguitars.com/rock/images/Jaco_Pastorius.jpg"
+    }, {
+        "id":8,
+        "title":"Jimi is GOD",
+        "artist":"Jimi Hendrix",
+        "needed":"Bassist, Vocalist",
+        "img":"http://assets.rollingstone.com/assets/images/artists/304x304/jimi-hendrix.jpg"
+    }, {
+        "id":9,
+        "title":"AK Jam",
+        "artist":"Albert King",
+        "needed":"Guitarist",
+        "img":"http://userserve-ak.last.fm/serve/252/2936131.jpg"
+    }, {
+        "id":10,
+        "title":"Nina Forever :)",
+        "artist":"Nina Simone",
+        "needed":"Pianist",
+        "img":"http://ninasimone.com/wp-content/uploads/2010/09/nina_hpos.jpg"
+    }, {
+        "id":11,
+        "title":"Zappa Jam",
+        "artist":"Frank Zappa",
+        "needed":"Bassist, Vocalist",
+        "img":"http://www.progarchives.com/progressive_rock_discography_band/1023.jpg"
+    }, {
+        "id":12,
+        "title":"Beefheart Jam",
+        "artist":"Captain Beefheart",
+        "needed":"Harmonist",
+        "img":"http://assets.rollingstone.com/assets/images/story/captain-beefheart-dead-at-age-69-20101217/1000x306/main.jpg"
+    }, {
+        "id":13,
+        "title":"Pink Floyd Jam",
+        "artist":"Pink Floyd",
+        "needed":"Harmonist",
+        "img":"http://hdwallpapersdesktop.com/wallpapers/wp-content/uploads/2011/09/21/Pink-Floyd-Wallpaper-3.jpg"
+    }, {
+        "id":14,
+        "title":"Purple it!",
+        "artist":"Deep Purple",
+        "needed":"Guitar",
+        "img":"http://userserve-ak.last.fm/serve/252/278332.jpg"
+    }, {
+        "id":15,
+        "title":"WHO CARES?",
+        "artist":"Miles Davis",
+        "needed":"Pianist",
+        "img":"http://content6.flixster.com/photo/13/82/54/13825408_ori.jpg"
+    }]
+}

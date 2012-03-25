@@ -4,11 +4,11 @@
         font-weight: bold;
         line-height: 18px;
 
-        span {
+        .more {
             display: block;
             font-size: 14px;
             font-weight: normal;
-            color: #666;
+            color: #777;
         }
     }
 
@@ -38,13 +38,10 @@
         padding: 22px;
         height: 100px;
 
-        > * {
-            float: left;
-        }
-
         .headshot {
-            height: 60px;
-            width: 60px;
+            float: right;
+            height: 200px;
+            width: 200px;
             margin-right: 10px;
             background-size: cover;
             background-position: center center;
@@ -53,22 +50,36 @@
             -webkit-box-shadow: inset 0 0 2px rgba(0,0,0,.4);
         }
 
-        .name {
+        .title, .artist, .needed, .playing {
             width: 195px;
-            padding-top: 0;
+            padding-bottom: 20px;
+            font-size: 14px;
+
+        }
+
+        .title {
             font-size: 22px;
             font-weight: bold;
+        }
+
+        .artist {
 
             span {
-                display: block;
-                font-size: 14px;
-                font-weight: normal;
-                color: #666;
+                font-weight: bold;
             }
+        }
 
-            a:link {
-                color: #3f9b26;
-                text-decoration: none;
+        .needed {
+
+            span {
+                font-weight: bold;
+            }
+        }
+
+        .playing {
+
+            span {
+                font-weight: bold;
             }
         }
     }

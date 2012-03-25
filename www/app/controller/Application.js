@@ -38,27 +38,26 @@ Ext.define('BandOnTheRun.controller.Application', {
     },
 
     onBandPush: function(view, item) {
-        var editButton = this.getEditButton();
+        //var editButton = this.getEditButton();
 
         if (item.xtype == "band-show") {
-            this.getBands().deselectAll();
+            this.getListBand().deselectAll();
 
-            this.showEditButton();
+            //this.showEditButton();
         } else {
-            this.hideEditButton();
+            //this.hideEditButton();
         }
     },
 
     onBandPop: function(view, item) {
         if (item.xtype == "band-edit") {
-            this.showEditButton();
+            //this.showEditButton();
         } else {
-            this.hideEditButton();
+            //this.hideEditButton();
         }
     },
 
     onBandSelect: function(list, index, node, record) {
-        var editButton = this.getEditButton();
 
         if (!this.showBand) {
             this.showBand = Ext.create('BandOnTheRun.view.band.Show');
