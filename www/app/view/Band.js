@@ -3,9 +3,9 @@ Ext.define('BandOnTheRun.view.Band', {
     xtype: 'bandview',
 
     requires: [
-        'BandOnTheRun.view.Contacts',
-        'BandOnTheRun.view.contact.Show',
-        'BandOnTheRun.view.contact.Edit'
+        'BandOnTheRun.view.band.List',
+        'BandOnTheRun.view.band.Show',
+        'BandOnTheRun.view.band.Edit'
     ],
 
     config: {
@@ -47,7 +47,7 @@ Ext.define('BandOnTheRun.view.Band', {
         },
 
         items: [
-            { xtype: 'contacts' }
+            { xtype: 'band-list' }
         ]
     }
 });

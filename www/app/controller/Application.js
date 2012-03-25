@@ -6,9 +6,10 @@ Ext.define('BandOnTheRun.controller.Application', {
             main: 'mainview',
             band: 'bandview',
             editButton: '#editButton',
-            contacts: 'contacts',
-            showContact: 'contact-show',
-            editContact: 'contact-edit',
+            bands: 'bands',
+            listBand: 'band-list',
+            showBand: 'band-show',
+            editBand: 'band-edit',
             saveButton: '#saveButton'
         },
 
@@ -18,29 +19,29 @@ Ext.define('BandOnTheRun.controller.Application', {
                 pop: 'onBandPop'
             },
             editButton: {
-                tap: 'onContactEdit'
+                tap: 'onBandEdit'
             },
-            contacts: {
-                itemtap: 'onContactSelect'
+            listBand: {
+                itemtap: 'onBandSelect'
             },
             saveButton: {
-                tap: 'onContactSave'
+                tap: 'onBandSave'
             },
-            editContact: {
-                change: 'onContactChange'
+            editBand: {
+                change: 'onBandChange'
             }
         }
     },
     
-    showBand: function(){
+    showBandPanel: function(){
         this.getMain().setActiveItem(this.getBand());
     },
 
     onBandPush: function(view, item) {
         var editButton = this.getEditButton();
 
-        if (item.xtype == "contact-show") {
-            this.getContacts().deselectAll();
+        if (item.xtype == "band-show") {
+            this.getBands().deselectAll();
 
             this.showEditButton();
         } else {
@@ -49,46 +50,46 @@ Ext.define('BandOnTheRun.controller.Application', {
     },
 
     onBandPop: function(view, item) {
-        if (item.xtype == "contact-edit") {
+        if (item.xtype == "band-edit") {
             this.showEditButton();
         } else {
             this.hideEditButton();
         }
     },
 
-    onContactSelect: function(list, index, node, record) {
+    onBandSelect: function(list, index, node, record) {
         var editButton = this.getEditButton();
 
-        if (!this.showContact) {
-            this.showContact = Ext.create('BandOnTheRun.view.contact.Show');
+        if (!this.showBand) {
+            this.showBand = Ext.create('BandOnTheRun.view.band.Show');
         }
 
-        // Bind the record onto the show contact view
-        this.showContact.setRecord(record);
+        // Bind the record onto the show band view
+        this.showBand.setRecord(record);
 
-        // Push the show contact view into the navigation view
-        this.getBand().push(this.showContact);
+        // Push the show band view into the navigation view
+        this.getBand().push(this.showBand);
     },
 
-    onContactEdit: function() {
-        if (!this.editContact) {
-            this.editContact = Ext.create('BandOnTheRun.view.contact.Edit');
+    onBandEdit: function() {
+        if (!this.editBand) {
+            this.editBand = Ext.create('BandOnTheRun.view.band.Edit');
         }
 
-        // Bind the record onto the edit contact view
-        this.editContact.setRecord(this.getShowContact().getRecord());
+        // Bind the record onto the edit band view
+        this.editBand.setRecord(this.getShowBand().getRecord());
 
-        this.getBand().push(this.editContact);
+        this.getBand().push(this.editBand);
     },
 
-    onContactChange: function() {
+    onBandChange: function() {
         this.showSaveButton();
     },
 
-    onContactSave: function() {
-        var record = this.getEditContact().saveRecord();
+    onBandSave: function() {
+        var record = this.getEditBand().saveRecord();
 
-        this.getShowContact().updateRecord(record);
+        this.getShowBand().updateRecord(record);
 
         this.getBand().pop();
     },

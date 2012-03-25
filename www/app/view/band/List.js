@@ -1,12 +1,12 @@
-Ext.define('BandOnTheRun.view.Contacts', {
+Ext.define('BandOnTheRun.view.band.List', {
     extend: 'Ext.List',
-    xtype: 'contacts',
+    xtype: 'band-list',
 
     config: {
-        title: 'Address Book',
-        cls: 'x-contacts',
+        title: 'Jams',
+        cls: 'x-bands',
 
-        store: 'Contacts',
+        store: 'Bands',
         itemTpl: [
             '<div class="headshot" style="background-image:url(resources/images/headshots/{headshot});"></div>',
             '{firstName} {lastName}',

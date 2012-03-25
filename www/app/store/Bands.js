@@ -1,8 +1,8 @@
-Ext.define('BandOnTheRun.store.Contacts', {
+Ext.define('BandOnTheRun.store.Bands', {
     extend: 'Ext.data.Store',
 
     config: {
-        model: 'BandOnTheRun.model.Contact',
+        model: 'BandOnTheRun.model.Band',
         autoLoad: true,
         sorters: 'firstName',
         grouper: {

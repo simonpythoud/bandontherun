@@ -1,6 +1,6 @@
-Ext.define('BandOnTheRun.view.contact.Show', {
+Ext.define('BandOnTheRun.view.band.Show', {
     extend: 'Ext.Container',
-    xtype: 'contact-show',
+    xtype: 'band-show',
 
     config: {
         title: 'Information',
@@ -16,18 +16,6 @@ Ext.define('BandOnTheRun.view.contact.Show', {
                         '<div class="name">{firstName} {lastName}<span>{title}</span></div>',
                     '</div>'
                 ].join('')
-            },
-            {
-                xtype: 'map',
-                flex: 1,
-                mapOptions: {
-                    zoomControl: false,
-                    panControl: false,
-                    rotateControl: false,
-                    streetViewControl: false,
-                    mapTypeControl: false,
-                    zoom: 13
-                }
             }
         ],
 
@@ -37,11 +25,6 @@ Ext.define('BandOnTheRun.view.contact.Show', {
     updateRecord: function(newRecord) {
         if (newRecord) {
             this.down('#content').setData(newRecord.data);
-
-            this.down('map').setMapCenter({
-                latitude: newRecord.data.latitude,
-                longitude: newRecord.data.longitude
-            });
         }
     }
 });

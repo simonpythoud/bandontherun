@@ -1,6 +1,6 @@
-Ext.define('BandOnTheRun.view.contact.Edit', {
+Ext.define('BandOnTheRun.view.band.Edit', {
     extend: 'Ext.Container',
-    xtype: 'contact-edit',
+    xtype: 'band-edit',
 
     config: {
         title: 'Edit',

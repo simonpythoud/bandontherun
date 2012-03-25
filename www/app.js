@@ -18,15 +18,36 @@ Ext.application({
         144: 'resources/icons/icon@114.png'
     },
 
-    models: ['Contact'],
-    stores: ['Contacts'],
+    models: ['Band'],
+    stores: ['Bands'],
     views: ['Main', 'Login', 'Band'],
     controllers: ['Application', 'Login'],
 
     launch: function() {
-        Ext.Viewport.add({
-            xclass: 'BandOnTheRun.view.Main'
-        });
+        var config = {};
+        
+        // If we are on a phone, we just want to add the main panel into the viewport as is.
+        // This will make it stretch to the size of the Viewport.
+        
+        // If we are not on a phone, we want to make the main panel modal and give it a fixed with and height.
+        if (Ext.os.deviceType != 'Phone')  {
+            
+            config = {
+                modal: true,
+                height: 505,
+                width: 480,
+                centered: true,
+
+                // Disable hideOnMaskTap so it cannot be hidden
+                hideOnMaskTap: false
+            }
+        }
+        
+        var main = Ext.create('BandOnTheRun.view.Main', config);
+        
+        // Add it to the Viewport.
+        Ext.Viewport.add(main);
+        
         
         // login process
         var login = this.getController('Login');
@@ -51,17 +72,17 @@ Ext.application({
     }, 
     
     startup: function() {
-        this.getController('Application').showBand();
+        this.getController('Application').showBandPanel();
     }
 });
 
 function getUrlVars(url) {
-	url || (url = window.location.href);
-	var vars = {};
-	var parts = url.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) {
-		vars[key] = value;
-	});
-	return vars;
+    url || (url = window.location.href);
+    var vars = {};
+    var parts = url.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) {
+        vars[key] = value;
+    });
+    return vars;
 }
 
 /*

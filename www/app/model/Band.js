@@ -1,4 +1,4 @@
-Ext.define('BandOnTheRun.model.Contact', {
+Ext.define('BandOnTheRun.model.Band', {
     extend: 'Ext.data.Model',
 
     config: {
