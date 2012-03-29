@@ -11,9 +11,8 @@ Ext.define('BandOnTheRun.store.Bands', {
             }
         },
         proxy: {
-            type: 'ajax',
-            url: 'bands.json',
-//            url: 'http://172.25.97.123:8080/jams', 
+            type: 'jsonp',
+			url: 'http://severe-moon-1088.herokuapp.com/jams', 
             reader: {
                 type: 'json',
                 rootProperty: 'jams'
