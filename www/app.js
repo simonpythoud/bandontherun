@@ -1,29 +1,37 @@
-//<debug>
-Ext.Loader.setPath({
-    'Ext': 'st2/src'
-});
-//</debug>
-
 Ext.application({
     name: 'BandOnTheRun',
 
-    phoneStartupScreen: 'resources/loading/Homescreen.jpg',
-    tabletStartupScreen: 'resources/loading/Homescreen~ipad.jpg',
-
-    glossOnIcon: false,
-    icon: {
-        57: 'resources/icons/icon.png',
-        72: 'resources/icons/icon@72.png',
-        114: 'resources/icons/icon@2x.png',
-        144: 'resources/icons/icon@114.png'
-    },
+    requires: [
+    'Ext.MessageBox'
+    ],
 
     models: ['Band'],
     stores: ['Bands'],
     views: ['Main', 'Login', 'Band'],
     controllers: ['Application', 'Login'],
 
+    icon: {
+        '57': 'resources/icons/Icon.png',
+        '72': 'resources/icons/Icon~ipad.png',
+        '114': 'resources/icons/Icon@2x.png',
+        '144': 'resources/icons/Icon~ipad@2x.png'
+    },
+
+    isIconPrecomposed: true,
+
+    startupImage: {
+        '320x460': 'resources/startup/320x460.jpg',
+        '640x920': 'resources/startup/640x920.png',
+        '768x1004': 'resources/startup/768x1004.png',
+        '748x1024': 'resources/startup/748x1024.png',
+        '1536x2008': 'resources/startup/1536x2008.png',
+        '1496x2048': 'resources/startup/1496x2048.png'
+    },
+
     launch: function() {
+        // Destroy the #appLoadingIndicator element
+        Ext.fly('appLoadingIndicator').destroy();
+
         var config = {};
         
         // If we are on a phone, we just want to add the main panel into the viewport as is.
@@ -42,63 +50,45 @@ Ext.application({
                 hideOnMaskTap: false
             }
         }
-        
-        var main = Ext.create('BandOnTheRun.view.Main', config);
-        
-        // Add it to the Viewport.
-        Ext.Viewport.add(main);
-        
-        // login process
-        var login = this.getController('Login');
+
+        // Initialize the main view
+        Ext.Viewport.add(Ext.create('BandOnTheRun.view.Main', config));
         
         if(this.isLogged()){
-            this.startup(); 
+            this.getController('Application').showBandPanel();
         } 
-        
-//		
-//        // first thing we do, is to check to see if the url contains the access code
-//        // and process it if it does.
-//        login.handleOAuthCallback(window.location.href, {
-//            success : function() {
-//                window.location=window.location.pathname;  // this will force reload the page, and it will remove the accessToken from the URL
-//            }, 
-//            failure : function() {
-//                // this url was not done on call back, so normal login flow
-//                login.getLoggedInUser({
-//                    success : me.startup,
-//                    failure : me.showLogin
-//                });
-//            }
-//        });
-		
-    }, 
-    
-    startup: function() {
-        this.getController('Application').showBandPanel();
-    }, 
+    },
     
     isLogged : function() {
         // if URL contains a parameter 'code', then we will create an authorized user from that code.  If not, then we
         // return doing nothing.
-        var token = getUrlVars(window.location.href)['logged_in'];
+        var token = getUrlVars()['logged_in'];
         if(token && token == 'true') {
             return true;
         } else {
             return false;
         }
+    },
+
+    onUpdated: function() {
+        Ext.Msg.confirm(
+            "Application Update",
+            "This application has just successfully been updated to the latest version. Reload now?",
+            function(buttonId) {
+                if (buttonId === 'yes') {
+                    window.location.reload();
+                }
+            }
+            );
     }
 });
 
-function getUrlVars(url) {
-    url || (url = window.location.href);
+function getUrlVars() {
+    var url = window.location.href;
     var vars = {};
-    var parts = url.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) {
+    url.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m, key, value) {
         vars[key] = value;
     });
     return vars;
 }
 
-/*
-console.log("---startup");
-		this.getController('Login').hideLogin();
-*/

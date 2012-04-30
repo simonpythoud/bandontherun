@@ -2,25 +2,30 @@ $base-gradient: matte;
 $list-pressed-color: mix(#08679F, #fff, 10);
 $list-active-color: mix(#043F62, #fff, 0);
 
-//import the sencha touch theme
 @import 'sencha-touch/default/all';
 @import 'band';
 @import 'login';
 
+// You may remove any of the following modules that you
+// do not use in order to create a smaller css file.
 @include sencha-panel;
 @include sencha-buttons;
+@include sencha-sheet;
+@include sencha-picker;
+@include sencha-tabs;
 @include sencha-toolbar;
+@include sencha-toolbar-forms;
+@include sencha-indexbar;
 @include sencha-list;
 @include sencha-layout;
+@include sencha-carousel;
 @include sencha-form;
-@include sencha-loading-spinner;
+@include sencha-msgbox;
 
 //blue toolbar
 @include sencha-toolbar-ui('sencha', #06517E, matte);
 @include sencha-toolbar-ui('bandontherun', #F5D18A, matte);
-.x-toolbar-sencha .x-title {
-    text-shadow: 0 1px 0 rgba(0,0,0,.8);
-}
+
 
 //buttons
 @include sencha-button-ui('sencha', #E7681F, matte);
@@ -33,6 +38,9 @@ $list-active-color: mix(#043F62, #fff, 0);
     background-position: center 5px, center center;
 }
 
+.x-toolbar-sencha .x-title {
+    text-shadow: 0 1px 0 rgba(0,0,0,.8);
+}
 
 .x-toolbar-inner {
     .x-layout-hbox {

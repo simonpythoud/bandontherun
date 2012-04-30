@@ -50,7 +50,7 @@ Ext.define('BandOnTheRun.controller.Login', {
         // which is handed off to the app.
 
         var returnUri = escape(window.location.href);
-        window.location = "http://bandontherun.orospakr.ca:8081/login";
+        window.location = "http://stark-winter-4794.herokuapp.com/login";
         //window.location = returnUri + this.oAuthCred.urlAuthorize + '&client_id=' + this.oAuthCred.clientId + '&redirect_uri=' + returnUri + '&client_secret=' + this.oAuthCred.clientSecret + '&scope=profile%2CSMS%2CMMS%2CACC';
     },
     /**
@@ -61,7 +61,7 @@ Ext.define('BandOnTheRun.controller.Login', {
         var user = Ext.create('ATT.lib.messaging.model.Contact');
         user.set('email', userIdentity.info.email);
 
-        // derive phono presence and sencha-io names from email
+        // derive names from email
         var name = userIdentity.info.email;
         var index = userIdentity.info.email.indexOf('@');
         if(index > 0) {
@@ -73,11 +73,6 @@ Ext.define('BandOnTheRun.controller.Login', {
             tmpDeviceType='iPad';
         }
         _kmq.push(['identify', name+'/'+tmpDeviceType]);
-        var phono = name + "@voxeolabs.p1.im";
-        var sencha = userIdentity.info.email;
-
-        user.set('phono', phono);
-        user.set('sencha-io-id', sencha);
 
         userIdentity.info.phone && user.set('phone', userIdentity.info.phone);
 

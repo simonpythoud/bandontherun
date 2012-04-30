@@ -1,5 +1,5 @@
-Ext.define('BandOnTheRun.view.Main', {
-    extend: 'Ext.Panel',
+Ext.define("BandOnTheRun.view.Main", {
+        extend: 'Ext.Panel',
     xtype: 'mainview',
 
     requires: [
