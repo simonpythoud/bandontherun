@@ -144,7 +144,7 @@ function joinUserToConference(phoneNumber, done) {
 
 function getJams(client, res) {
     client.query(
-        'select j.id as id, j.title as title, j.artist as artist, ut.display_name as player from jams as j left join jams_needs as jn on j.id = jn.jam left join user_types as ut on jn.type = ut.id',
+        'select j.id as id, j.title as title, j.artist as artist, j.img as img, ut.display_name as player from jams as j left join jams_needs as jn on j.id = jn.jam left join user_types as ut on jn.type = ut.id',
         function selectCb(error, results, fields) {
             if (error) {
                 console.log('GetData Error: ' + error.message);
@@ -171,34 +171,31 @@ function getJams(client, res) {
 }
 
 function processList(i, results, jams, jams_players, client, response) {
-    console.log("Boo");
     var element = results[i];
     var id = element['id'];
-    
     i++;
     
-    var options = {
-        host: 'developer.echonest.com',   
-        port: 80,   
-        path: '/api/v4/artist/images?api_key=N6E4NIOVYMTHNDM8J&name=Eric+Clapton&format=json&results=1&start=0&license=cc-by-sa'
-    };
+//    var options = {
+//        host: 'developer.echonest.com',   
+//        port: 80,   
+//        path: '/api/v4/artist/images?api_key=N6E4NIOVYMTHNDM8J&name=Eric+Clapton&format=json&results=1&start=0&license=cc-by-sa'
+//    };
     
-    http.get(options, function(res) {
-        console.log("Got response: " + res.statusCode);
-        res.on('data', function(chunk) {
-            var o = JSON.parse(chunk.toString("utf8"));
-            console.log(chunk.toString("utf8"));
-            console.log(i);
-            console.log(o.response.images[0].url);
+//    http.get(options, function(res) {
+//        console.log("Got response: " + res.statusCode);
+//        res.on('data', function(chunk) {
+//            var o = JSON.parse(chunk.toString("utf8"));
+//            console.log(chunk.toString("utf8"));
+//            console.log(i);
+//            console.log(o.response.images[0].url);
 
             if(!containsJam(jams, id)) {
-                console.log("a");
                 jams.push({
                     id: id,
                     title: element['title'],
                     artist: element['artist'],
                     needed: jams_players[id],
-                    img: o.response.images[0].url
+                    img: element['img']//o.response.images[0].url
                 });
                 console.log(jams.length);
             }
@@ -212,10 +209,10 @@ function processList(i, results, jams, jams_players, client, response) {
 
                 client.end();
             }
-        });
-    }).on('error', function(e) {  
-        console.log("Got error: " + e.message);   
-    });
+//        });
+//    }).on('error', function(e) {  
+//        console.log("Got error: " + e.message);   
+//    });
 }
 
 function containsJam(a, id) {
