@@ -1,17 +1,18 @@
-{"name": "bandontherun",
- "version": "0.0.1",
- "private": true, 
- "description": "Jam with friends.",
- "keywords": ["music", "jam"],
- "dependencies": {
-     "mysql": "~>0.9.5",
-     "traverse": "~>0.6.0",
-     "twilio": "~>0.4.0",
-     "express": "~>2.5.8",
-     "optimist": "~>0.3.1", 
-	 "mongojs" : "0.3.2" 
- },
- "engines": {
-	"node": "0.6.x"
-}
+{
+	"name": "bandontherun",
+	"version": "0.0.1",
+	"private": true, 
+	"description": "Jam with friends.",
+	"keywords": ["music", "jam"],
+	"dependencies": {
+		"mysql": "~>0.9.5",
+		"traverse": "~>0.6.0",
+		"twilio": "~>0.4.0",
+		"express": "~>2.5.8",
+		"optimist": "~>0.3.1",
+        "bird": "~>0.2.2"
+	},
+	"engines": {
+		"node": "0.6.x"
+	}
 }

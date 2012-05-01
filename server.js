@@ -1,23 +1,21 @@
 var express = require('express');
-var mongojs = require("mongojs");
-var util = require("util");
 var optimist = require("optimist");
+var mysql = require('mysql')
+var http = require('http');
 
 var argv = optimist.argv;
 
-var http = require('http');
+//var TwilioClient = require('twilio').Client;
+//var Twiml = require('twilio').Twiml;
+//var client = new TwilioClient(argv["twilio-sid"], argv["twilio-token"], "stark-winter-4794.herokuapp.com");
 
-var TwilioClient = require('twilio').Client;
-var Twiml = require('twilio').Twiml;
-var client = new TwilioClient(argv["twilio-sid"], argv["twilio-token"], "bandontherun.orospakr.ca");
+//var orophone = client.getPhoneNumber('+16138007307');
 
-var orophone = client.getPhoneNumber('+16138007307');
-
-var Bird = require('bird')({
-    oauth_token : argv["twitter-token"],
-    oauth_token_secret : argv["twitter-token-secret"],
-    callback: 'http://stark-winter-4794.herokuapp.com:3000/callback'
-});
+//var Bird = require('bird')({
+//    oauth_token : "zWUPMkhZwYRcuQZOuJg", //argv["twitter-token"],
+//    oauth_token_secret : "FkACuojoR6fB8hrVFZBkxOUmqSEaLVnOeh9VNvolKk", //argv["twitter-token-secret"],
+//    callback: 'http://stark-winter-4794.herokuapp.com/callback'
+//});
 
 var app = express.createServer();
 
@@ -100,65 +98,21 @@ app.get('/home_timeline', function(req, res){
 });
 
 app.get('/jams',function(req, res){
-    var db = mongojs.connect(process.env.DB_CONNECTION, ["jams"]);
-  
-    db.jams.find({}, function(err, jams) {
-        if( err || !jams) {
-            console.log("No female users found");
-        }
-        else {
-            console.log(jams.length);
-            processList(0, jams, res);
-        }
+    var client = mysql.createClient({
+        'host':'us-cdbr-east.cleardb.com',
+        'port':3306,
+        'user':'978c4d073de058',
+        'password':'45651d09'
     });
+    client.query('USE heroku_217324e258ab7fa');
+    getJams(client, res);
 });
 
 var port = process.env.PORT || 3000;
+
 app.listen(port, function() {
     console.log("Listening on " + port);
 });
-
-function processList(i, jams, response) {
-    var element = jams[i];
-    
-    i++;
-    
-    var http = require('http');
-    var options = {
-        host: 'developer.echonest.com',   
-        port: 80,   
-        path: '/api/v4/artist/images?api_key=N6E4NIOVYMTHNDM8J&name=Eric+Clapton&format=json&results=1&start=0&license=cc-by-sa'
-    };
-    
-    var req = http.get(options, function(res) {
-        console.log("Got response: " + res.statusCode);
-        res.on('data', function(chunk) {
-            var o = JSON.parse(chunk.toString("utf8"));
-            console.log(o.response.images[0].url);
-
-            element.img = o.response.images[0].url
-	    
-            if (i < jams.length) {
-                processList(i, jams, response)
-            } else {
-                response.json({
-                    "jams": jams
-                });
-            }
-        });
-    }).on('error', function(e) {  
-        console.log("Got error: " + e.message);   
-    });
-}
-
-function containsJam(a, id) {
-    for (var i = 0; i < a.length; i++) {
-        if (a[i].id === id) {
-            return true;
-        }
-    }
-    return false;
-}
 
 function provides(type) {
     return function(req, res, next){
@@ -186,4 +140,89 @@ function joinUserToConference(phoneNumber, done) {
             });
         });
     });
+}
+
+function getJams(client, res) {
+    client.query(
+        'select j.id as id, j.title as title, j.artist as artist, ut.display_name as player from jams as j left join jams_needs as jn on j.id = jn.jam left join user_types as ut on jn.type = ut.id',
+        function selectCb(error, results, fields) {
+            if (error) {
+                console.log('GetData Error: ' + error.message);
+                client.end();
+                return;
+            }
+            
+            var element;
+            var jams_players = {};
+            var jams = [];
+
+            for( var i = 0; i < results.length; i++ ) {
+                element = results[i];
+                var id = element['id'];
+
+                if(!jams_players[id]) {
+                    jams_players[id] = element['player'];
+                } else {
+                    jams_players[id] += (", " + element['player']);
+                }
+            }
+            processList(0, results, jams, jams_players, client, res);
+        });
+}
+
+function processList(i, results, jams, jams_players, client, response) {
+    console.log("Boo");
+    var element = results[i];
+    var id = element['id'];
+    
+    i++;
+    
+    var options = {
+        host: 'developer.echonest.com',   
+        port: 80,   
+        path: '/api/v4/artist/images?api_key=N6E4NIOVYMTHNDM8J&name=Eric+Clapton&format=json&results=1&start=0&license=cc-by-sa'
+    };
+    
+    http.get(options, function(res) {
+        console.log("Got response: " + res.statusCode);
+        res.on('data', function(chunk) {
+            var o = JSON.parse(chunk.toString("utf8"));
+            console.log(chunk.toString("utf8"));
+            console.log(i);
+            console.log(o.response.images[0].url);
+
+            if(!containsJam(jams, id)) {
+                console.log("a");
+                jams.push({
+                    id: id,
+                    title: element['title'],
+                    artist: element['artist'],
+                    needed: jams_players[id],
+                    img: o.response.images[0].url
+                });
+                console.log(jams.length);
+            }
+            if (i < results.length) {
+                processList(i, results, jams, jams_players, client, response)
+            } else {
+
+                response.json({
+                        jams: jams
+                });
+
+                client.end();
+            }
+        });
+    }).on('error', function(e) {  
+        console.log("Got error: " + e.message);   
+    });
+}
+
+function containsJam(a, id) {
+    for (var i = 0; i < a.length; i++) {
+        if (a[i].id === id) {
+            return true;
+        }
+    }
+    return false;
 }
