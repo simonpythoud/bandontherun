@@ -8,7 +8,7 @@ Ext.define('BandOnTheRun.view.band.List', {
 
         store: 'Bands',
         itemTpl: [
-            '<div class="headshot" style="background-image:url({img});"></div>',
+            '<div class="headshot" style="background-image:url(\'{img}\');"></div>',
             '{title}',
             '<div class="more"><span>Artist we play: {artist}</span> | <span>We need: {needed}</span></div>'
         ].join('')
