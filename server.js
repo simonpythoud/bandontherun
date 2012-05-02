@@ -19,28 +19,35 @@ var argv = optimist.argv;
 
 var app = express.createServer();
 
-app.enable("jsonp callback");
-
+app.use(express.methodOverride());
 app.use(express.bodyParser());
 app.use(express.cookieParser());
+app.use(app.router);
+app.use(express.static(__dirname + '/www'));
+app.use(express.errorHandler({
+    dumpExceptions: true, 
+    showStack: true
+}));
+
+app.enable("jsonp callback");
 app.use(express.session({
     secret: "just-the-letter-a"
 }));
 
-app.get('/', function(req, res){
-    if (req.session.signedIn) {
-        // res.send("Hi " + req.session.screen_name + " it's nice to see you signed in");
-        res.writeHead(302, {
-            Location: "/index.html?logged_in=true"
-        });
-        res.end()
-    } else {
-        res.writeHead(302, {
-            Location: "/index.html"
-        });
-        res.end();
-    }
-});
+//app.get('/', function(req, res){
+//    if (req.session.signedIn) {
+//        // res.send("Hi " + req.session.screen_name + " it's nice to see you signed in");
+//        res.writeHead(302, {
+//            Location: "/index.html?logged_in=true"
+//        });
+//        res.end()
+//    } else {
+//        res.writeHead(302, {
+//            Location: "/index.html"
+//        });
+//        res.end();
+//    }
+//});
 
 app.get('/login', function(req, res){
     Bird.login(req, function(err, oauth_token, oauth_token_secret, results){
@@ -175,40 +182,40 @@ function processList(i, results, jams, jams_players, client, response) {
     var id = element['id'];
     i++;
     
-//    var options = {
-//        host: 'developer.echonest.com',   
-//        port: 80,   
-//        path: '/api/v4/artist/images?api_key=N6E4NIOVYMTHNDM8J&name=Eric+Clapton&format=json&results=1&start=0&license=cc-by-sa'
-//    };
+    //    var options = {
+    //        host: 'developer.echonest.com',   
+    //        port: 80,   
+    //        path: '/api/v4/artist/images?api_key=N6E4NIOVYMTHNDM8J&name=Eric+Clapton&format=json&results=1&start=0&license=cc-by-sa'
+    //    };
     
-//    http.get(options, function(res) {
-//        console.log("Got response: " + res.statusCode);
-//        res.on('data', function(chunk) {
-//            var o = JSON.parse(chunk.toString("utf8"));
-//            console.log(chunk.toString("utf8"));
-//            console.log(i);
-//            console.log(o.response.images[0].url);
+    //    http.get(options, function(res) {
+    //        console.log("Got response: " + res.statusCode);
+    //        res.on('data', function(chunk) {
+    //            var o = JSON.parse(chunk.toString("utf8"));
+    //            console.log(chunk.toString("utf8"));
+    //            console.log(i);
+    //            console.log(o.response.images[0].url);
 
-            if(!containsJam(jams, id)) {
-                jams.push({
-                    id: id,
-                    title: element['title'],
-                    artist: element['artist'],
-                    needed: jams_players[id],
-                    img: element['img']//o.response.images[0].url
-                });
-                console.log(jams.length);
-            }
-            if (i < results.length) {
-                processList(i, results, jams, jams_players, client, response)
-            } else {
+    if(!containsJam(jams, id)) {
+        jams.push({
+            id: id,
+            title: element['title'],
+            artist: element['artist'],
+            needed: jams_players[id],
+            img: element['img']//o.response.images[0].url
+        });
+        console.log(jams.length);
+    }
+    if (i < results.length) {
+        processList(i, results, jams, jams_players, client, response)
+    } else {
 
-                response.json({
-                        jams: jams
-                });
+        response.json({
+            jams: jams
+        });
 
-                client.end();
-            }
+        client.end();
+    }
 //        });
 //    }).on('error', function(e) {  
 //        console.log("Got error: " + e.message);   

@@ -11,9 +11,9 @@ Ext.define("BandOnTheRun.view.Main", {
         layout: 'card',
 
         items: [
-        {
-            xtype: 'loginview'
-        }, 
+//        {
+//            xtype: 'loginview'
+//        }, 
         {
             xtype: 'bandview'
         } 

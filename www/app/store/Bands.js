@@ -11,7 +11,7 @@ Ext.define('BandOnTheRun.store.Bands', {
             }
         },
         proxy: {
-            type: 'jsonp',
+            type: 'ajax',
 			url: 'http://stark-winter-4794.herokuapp.com/jams', 
             reader: {
                 type: 'json',
